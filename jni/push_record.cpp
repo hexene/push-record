@@ -295,6 +295,19 @@ int main(int argc, char **argv)
         pthread_cond_signal(&condition);
         pthread_mutex_unlock(&in_mutex);
         printf("Last frame\n");
+        
+#if DECODE_ONLY
+        while (!out_queue.empty()) {
+            pthread_mutex_lock(&out_mutex);
+            frame = *out_queue.begin();
+
+            printf("main: Got an output frame of size: %d\n", frame->get_size());
+            out_queue.erase(out_queue.begin());
+            pthread_mutex_unlock(&out_mutex);
+        
+            delete frame;
+        }
+#endif
     } else {
         fprintf(stderr, "Source read failed\n");
         return 2;
