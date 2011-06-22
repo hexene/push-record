@@ -5,11 +5,10 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES:=       \
      push_record.cpp
 
-LOCAL_LDFLAGS := -L../lib -Wl,-rpath,../lib -Wl,--allow-shlib-undefined
+LOCAL_LDFLAGS := -L../lib -Wl,-rpath,../lib
 LOCAL_LDLIBS := -lstagefright -lmedia -lutils -lbinder
 
 LOCAL_C_INCLUDES:= \
-    ../android/bionic/libc/include \
     ../android/system/core/include \
     ../android/frameworks/base/include \
     ../android/frameworks/base/media/libstagefright \
