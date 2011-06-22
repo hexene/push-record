@@ -251,7 +251,7 @@ source_end:
         while(true) {
             if (thread_exited) {
                 source_done = 1;
-                goto decode_listen;
+                break;
             }
             pthread_mutex_lock(&in_mutex);
             if (in_queue.size() >= 10) {
